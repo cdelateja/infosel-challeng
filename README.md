@@ -1,2 +1,2 @@
-# infosel-challeng
+# infosel-challenge
 Proyecto challenge para infosel
