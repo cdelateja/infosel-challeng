@@ -30,10 +30,9 @@ class InstaPageService(private val client: Client,
     }
 
     @Throws(ServiceException::class)
-    fun obtenerPagina(id: Int): PageResponse {
-        return Result.result(client.get(urlInstaPage +
-                env.getProperty("instapage.getPage") + id + "/null/A/1?autoplayDisabled=1"))
-                .toObject(PageResponse::class.java)
+    fun obtenerPagina(id: Int): String {
+        return client.get(urlInstaPage +
+                env.getProperty("instapage.getPage") + id + "/null/A/1?autoplayDisabled=1")
     }
 
     @Throws(ServiceException::class)

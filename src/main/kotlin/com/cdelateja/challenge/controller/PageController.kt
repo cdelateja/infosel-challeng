@@ -40,8 +40,8 @@ class PageController(private val instaPageService: InstaPageService) {
         }
     }
 
-    @ApiOperation(value = "Obtener paginas",
-            notes = "Obtener paginas",
+    @ApiOperation(value = "Obtener pagina",
+            notes = "Obtiene paguna html por id",
             produces = "application/json",
             response = Response::class)
     @ApiResponses(value = [
