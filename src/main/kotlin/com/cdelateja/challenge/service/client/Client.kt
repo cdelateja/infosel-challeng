@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.client.RestClientException
 import org.springframework.web.client.RestTemplate
 import java.io.IOException
+import java.util.*
 
 @Service
 class Client {
@@ -37,6 +38,11 @@ class Client {
     }
 
     @Throws(ServiceException::class)
+    fun delete(url: String): String {
+        return request(RequestType.DELETE, url, null)
+    }
+
+    @Throws(ServiceException::class)
     fun request(requestType: RequestType, url: String, jsonBody: String?): String {
         return getRequest(typeOfResponse(requestType, url, jsonBody))
     }
@@ -47,6 +53,9 @@ class Client {
         validateResponse(response)
         return try {
             log.info("--------------> Output : $jsonOutput")
+            if (Objects.isNull(jsonOutput)) {
+                return ""
+            }
             jsonOutput!!
         } catch (e: IOException) {
             throw ServiceException(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.message)

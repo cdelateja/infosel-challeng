@@ -3,8 +3,9 @@ server:
 
 instapage:
   url: https://app.instapage.com
-  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7ImtleSI6IkFVVEg6VG9rZW46MzgzMjI2MTpyakVaZTMvd1lvendsZWEzOi9zZGVyd2FDUFNlMWF2UXFLNXoreHVZdWw4enZFV1N5QytTc0NhUkM2b2M9In0sImV4cCI6MTYxNDA0MjI0MSwic3ViIjoidXNlcjozODMyMjYxIiwibmJmIjoxNjE0MDM1MDQxfQ.LV4Ryrmv7878STBHArBIaUfNMZcxoxhWlrh49x9ZjX8
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7ImtleSI6IkFVVEg6VG9rZW46MzgzMjI2MTpuVEYrR3NaZ1ZvQ3V1N25zOlpJYkRJQWxLQkl3OEI2Z0JGazVvV3M0clhNUmJrWFloaFpseVY2Wk5Kcjg9In0sImV4cCI6MTYxNDEwNjk0Miwic3ViIjoidXNlcjozODMyMjYxIiwibmJmIjoxNjE0MDk5NzQyfQ.aeifstDNcAdb9d-G8nynNH37uRqlC7BbkFPZQ0dRnkw
   getPages: /api/3/customers/4246416/pages?page=1
   getPage: /preview-server/show-page/
   createPage: /api/3/customers/4246416/pages
+  deletePage: /api/3/experiences/
   getTemplates: /api/3/templates

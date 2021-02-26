@@ -10,8 +10,11 @@ import io.swagger.annotations.ApiResponses
 import org.apache.logging.log4j.LogManager
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
+@Validated
 @CrossOrigin
 @RestController
 @RequestMapping(value = ["/api/v1"])
@@ -41,7 +44,7 @@ class PageController(private val instaPageService: InstaPageService) {
     }
 
     @ApiOperation(value = "Obtener pagina",
-            notes = "Obtiene paguna html por id",
+            notes = "Obtiene pagina html por id",
             produces = "application/json",
             response = Response::class)
     @ApiResponses(value = [
@@ -53,6 +56,25 @@ class PageController(private val instaPageService: InstaPageService) {
     fun obtenerPagina(@RequestParam id: Int): ResponseEntity<*>? {
         return try {
             ResponseEntity(Response(HttpStatus.OK.value(), instaPageService.obtenerPagina(id)), HttpStatus.OK)
+        } catch (e: ServiceException) {
+            log.error("Error en obtenerPagina: $e")
+            ResponseEntity(Response(e), HttpStatus.OK)
+        }
+    }
+
+    @ApiOperation(value = "Borrar pagina",
+            notes = "Borra pagina por id",
+            produces = "application/json",
+            response = Response::class)
+    @ApiResponses(value = [
+        ApiResponse(code = 200, message = "Ok"),
+        ApiResponse(code = 401, message = "No autorizado"),
+        ApiResponse(code = 500, message = "Error interno"),
+        ApiResponse(code = 204, message = "Sin registro")])
+    @DeleteMapping(value = ["/landing-page"], produces = ["application/json"])
+    fun borrarPagina(@RequestParam id: Int): ResponseEntity<*>? {
+        return try {
+            ResponseEntity(Response(HttpStatus.OK.value(), instaPageService.borrarPagina(id)), HttpStatus.OK)
         } catch (e: ServiceException) {
             log.error("Error en obtenerPagina: $e")
             ResponseEntity(Response(e), HttpStatus.OK)
@@ -89,7 +111,7 @@ class PageController(private val instaPageService: InstaPageService) {
         ApiResponse(code = 500, message = "Error interno"),
         ApiResponse(code = 204, message = "Registro no encontrado")])
     @PostMapping(value = ["/landing-pages"], consumes = ["application/json"], produces = ["application/json"])
-    fun guardarPagina(@RequestBody request: PageRequest): ResponseEntity<*>? {
+    fun guardarPagina(@Valid  @RequestBody request: PageRequest): ResponseEntity<*>? {
         return try {
             ResponseEntity(Response(HttpStatus.OK.value(),
                     instaPageService.guardarPagina(request)), HttpStatus.OK)

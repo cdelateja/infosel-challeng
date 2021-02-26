@@ -1,0 +1,22 @@
+version: '2.2'
+
+services:
+  formulas:
+    image: com.cdelateja/challenge:1.0.0
+    container_name: challenge
+    mem_limit: 352m
+    environment:
+      - _JAVA_OPTIONS=-XX:+UnlockExperimentalVMOptions
+                      -DMALLOC_MMAP_THRESHOLD_=2048
+                      -DMALLOC_ARENA_MAX=2
+                      -Xms128m
+                      -Xmx128m
+                      -Dcom.sun.management.jmxremote
+                      -Dcom.sun.management.jmxremote.local.only=false
+                      -Dcom.sun.management.jmxremote.authenticate=false
+                      -Dcom.sun.management.jmxremote.port=9000
+                      -Dcom.sun.management.jmxremote.rmi.port=9000
+                      -Dcom.sun.management.jmxremote.ssl=false
+    ports:
+      - "9000:9000"
+    restart: always

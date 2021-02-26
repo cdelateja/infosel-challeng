@@ -23,24 +23,44 @@ class InstaPageService(private val client: Client,
     @Value("\${instapage.url}")
     private val urlInstaPage: String? = null
 
+    /**
+     * Funcion encargada de obtener todas las paginas
+     */
     @Throws(ServiceException::class)
     fun obtenerPaginas(): PageResponse {
         return Result.result(client.get(urlInstaPage + env.getProperty("instapage.getPages")))
                 .toObject(PageResponse::class.java)
     }
 
+    /**
+     * Funcion encargada de obtener el HTML por id
+     */
     @Throws(ServiceException::class)
     fun obtenerPagina(id: Int): String {
         return client.get(urlInstaPage +
                 env.getProperty("instapage.getPage") + id + "/null/A/1?autoplayDisabled=1")
     }
 
+    /**
+     * Funcion encargada de borrar (Cambia estatus) de una pagina
+     */
+    @Throws(ServiceException::class)
+    fun borrarPagina(id: Int): String {
+        return client.delete(urlInstaPage + env.getProperty("instapage.deletePage") + id)
+    }
+
+    /**
+     * Funcion encargada de obtener el catalogo de plantillas
+     */
     @Throws(ServiceException::class)
     fun obtenerTemplates(): TemplateResponse {
         return Result.result(client.get(urlInstaPage + env.getProperty("instapage.getTemplates")))
                 .toObject(TemplateResponse::class.java)
     }
 
+    /**
+     * Funcion encargada de guardar una pagina
+     */
     @Throws(ServiceException::class)
     fun guardarPagina(pageRequest: PageRequest): PageSaveResponse {
         return Result.result(client.post(urlInstaPage + env.getProperty("instapage.createPage"), pageRequest))
