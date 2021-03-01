@@ -1,4 +1,4 @@
-# Formulas
+# Challenge
 
 Proyecto back challenge Infosel
 
